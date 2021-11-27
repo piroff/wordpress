@@ -33,7 +33,7 @@ With or without changes, you can proceed with the creation of infrastructure and
 terraform init
 terraform apply
 ```
-Execution plan will be printed and you will be prompted whether to create the resurce (in case -auto-approve option is not used). Type 'yes' to proceed with the creation.
+Execution plan will be printed and you will be prompted whether to create the resurce (in case -auto-approve option is not used). Type 'yes' to proceed with the creation. End-to-end process will take ~5 min. It may take another minute until all services are up and healthy.
 ```bash
 Enter a value: yes
 ```
@@ -53,10 +53,10 @@ After applying should be similar to:
 | Name | Description |
 |------|-------------|
 | <a name="output_db_pass"></a> [db\_pass](#output\_db\_pass) | Database password |
-| <a name="output_instance_id"></a> [db\_pass](#output\_instance\_id) | List of EC2 instance IDs. |
-| <a name="output_instance_public_ip"></a> [db\_pass](#output\_instance\_public\_ip) | List of instance public IPs. |
-| <a name="output_lb_dns_name"></a> [db\_pass](#output\_lb\_dns\_name) | Load balancer public FQDN address. |
-| <a name="output_private_key"></a> [db\_pass](#output\_private\_key) | Base64 encoded RSA private key. |
+| <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | List of EC2 instance IDs. |
+| <a name="output_instance_public_ip"></a> [instance\_public\_ip](#output\_instance\_public\_ip) | List of instance public IPs. |
+| <a name="output_lb_dns_name"></a> [lb\_dns\_name](#output\_lb\_dns\_name) | Load balancer public FQDN address. |
+| <a name="output_private_key"></a> [private\_key](#output\_private\_key) | Base64 encoded RSA private key. |
 
 ### Usage
 
