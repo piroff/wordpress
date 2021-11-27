@@ -70,6 +70,11 @@ Private key and DB password are also saved in separate files in 'credentials' di
 credentials/db_pass
 credentials/private_key.pem
 ```
+You can SSH directly to any of the EC2 instances using the instance_public_ip from the output:
+```bash
+ssh -i credentials/private_key.pem ec2-user@<IP>
+```
+![App Screenshot](screenshots/ec2_login.png)
 Use the lb_dns_name output to access the Wordpres home page.  
 Also, individual public IP address can also be used to ensure each EC2 instance is up and running (without then need to login to the AWS console and check Target Group targets availability)
 
