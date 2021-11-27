@@ -83,8 +83,9 @@ aws ec2 describe-instances \
   --query "Reservations[*].Instances[*].{InstanceId:InstanceId,PublicIP:PublicIpAddress,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" \
   --filters Name=instance-state-name,Values=running \
   --output table
+```
 
-
+Output should be similar to:
 ----------------------------------------------------------------------
 |                          DescribeInstances                         |
 +----------------------+---------------+------------------+----------+
@@ -93,7 +94,6 @@ aws ec2 describe-instances \
 |  i-0123456789abcdefg |  Wordpress-01 |  12.345.678.90   |  running |
 |  i-abcdefg0123456789 |  Wordpress-02 |  98.765.43.210   |  running |
 +----------------------+---------------+------------------+----------+
-```
 
 Get the output of EC2 initialization. Useful for troubleshooting cloud init.
 
