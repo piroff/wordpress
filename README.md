@@ -44,6 +44,16 @@ After applying should be similar to:
 ![App Screenshot](screenshots/terraform_apply.png)
 
 
+## Un-Installation
+
+To completely remove all the resources use the command below. All the resources that will be destroyed will be displayed. Confirm with "yes" when prompted to proceed.
+```bash
+terraform destroy
+```
+The final message at completion should similar to:
+![App Screenshot](screenshots/terraform_destroy.png)
+
+
 ## Outputs
 
 ### Description
