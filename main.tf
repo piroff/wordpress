@@ -48,8 +48,6 @@ data "template_cloudinit_config" "user_data_wp" {
     sudo chown -R ec2-user:apache /var/www
 
     if [[ `hostname` == "wordpress-01" ]]; then
-      echo I am number 01
-      echo GET PUBLIC IP OR FQDN
       cd /tmp
       curl -LJ https://github.com/piroff/wordpress/tarball/main -o wordpress.tar.gz
       tar xzf wordpress.tar.gz
@@ -62,12 +60,12 @@ data "template_cloudinit_config" "user_data_wp" {
       sed -i 's/DB_NAME/${var.db_name}/' cron.sh
       sed -i 's/DB_ADDR/${module.db_default.db_instance_address}/' cron.sh
       mv cron.sh /home/ec2-user/
+      echo "0 3 * * 0 /home/ec2-user/cron.sh > /dev/null 2>&1" | tee /var/spool/cron/ec2-user
       cd /var/www/html
       wp core install --url="${module.alb.lb_dns_name}" --title="Dext" --admin_user="${var.db_user}" --admin_password="${module.db_default.db_pass}" --admin_email="my@ma.il"
       wp post delete $(wp post list --post_status=publish --format=ids)
       wp post delete $(wp post list --post_status=trash --format=ids)
       wp post create /tmp/blogpost_body.txt --post_title='Linux namespaces' --post_status='publish'
-      echo "0 3 * * 0 /home/ec2-user/cron.sh > /dev/null 2>&1" | tee /var/spool/cron/ec2-user
     fi
     EOF
   }
