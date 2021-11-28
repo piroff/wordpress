@@ -62,10 +62,16 @@ data "template_cloudinit_config" "user_data_wp" {
       mv cron.sh /home/ec2-user/
       echo "0 3 * * 0 /home/ec2-user/cron.sh > /dev/null 2>&1" | tee /var/spool/cron/ec2-user
       cd /var/www/html
-      wp core install --url="${module.alb.lb_dns_name}" --title="Dext" --admin_user="${var.db_user}" --admin_password="${module.db_default.db_pass}" --admin_email="my@ma.il"
-      wp post delete $(wp post list --post_status=publish --format=ids)
-      wp post delete $(wp post list --post_status=trash --format=ids)
-      wp post create /tmp/blogpost_body.txt --post_title='Linux namespaces' --post_status='publish'
+      wp post list || wp_installed=NO
+      if [[ $wp_installed == "NO" ]]; then
+        echo "Installing WordPress..."
+        wp core install --url="${module.alb.lb_dns_name}" --title="Dext" --admin_user="${var.db_user}" --admin_password="${module.db_default.db_pass}" --admin_email="my@ma.il"
+        wp post delete $(wp post list --post_status=publish --format=ids)
+        wp post delete $(wp post list --post_status=trash --format=ids)
+        wp post create /tmp/blogpost_body.txt --post_title='Linux namespaces' --post_status='publish'
+      else
+        echo "WordPress is already installed."
+      fi
     fi
     EOF
   }
@@ -134,6 +140,10 @@ module "security_group_rds" {
 
 module "ec2_complete" {
   source = "./modules/ec2"
+
+  depends_on = [
+    module.db_default.db_instance_status
+  ]
 
   count = var.wp_instances
   name  = "${title(var.name)}-${format("%02d", count.index + 1)}"
