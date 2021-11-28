@@ -81,7 +81,7 @@ Also, individual public IP address can also be used to ensure each EC2 instance 
 
 ### Maintenance
 
-Each Sunday morning at 3:00 am database tables optimization is performed. Before and after the operation the size of each table is gathered and stored in a log file. Optimization itself is also logged. All files are available on the first EC2 instance (<hostname>-01) under /tmp/
+Each Sunday morning at 3:00 am database tables optimization is performed. Before and after the operation the size of each table is gathered and stored in a log file. Optimization itself is also logged. All files are available on the first EC2 instance (\<hostname\>-01) under /tmp/
 ```bash
 03:00 Sunday-size-before-optimize.log
 03:00 Sunday-optimize.log
