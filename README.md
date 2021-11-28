@@ -7,10 +7,11 @@
 The goal of this project is to create AWS infrastructure based on the Terraform configuration. And to deploy semi-distributed Wordpress system (multiple application units with single DB instance).
 
 
-
 ## Assumptions
 
 It is expected that the user already has AWS CLI and Terraform CLI installed on his system. As well as AWS Access and Secret keys updated (or any other valid AWS authentication presented).
+
+
 ## Installation
 
 Download the current project (git clone it, or else) to your system. You may want to review the default preset configurtion in terraform.tfvars file in the project root directory:
@@ -43,9 +44,6 @@ After applying should be similar to:
 ![App Screenshot](screenshots/terraform_apply.png)
 
 
-
-
-    
 ## Outputs
 
 ### Description
@@ -78,7 +76,17 @@ ssh -i credentials/private_key.pem ec2-user@<IP>
 Use the lb_dns_name output to access the Wordpres home page.  
 Also, individual public IP address can also be used to ensure each EC2 instance is up and running (without then need to login to the AWS console and check Target Group targets availability)
 
+
 ## Appendix
+
+### Maintenance
+
+Each Sunday morning at 3:00 am database tables optimization is performed. Before and after the operation the size of each table is gathered and stored in a log file. Optimization itself is also logged. All files are available on the first EC2 instance (<hostname>-01) under /tmp/
+```bash
+03:00 Sunday-size-before-optimize.log
+03:00 Sunday-optimize.log
+03:00 Sunday-size-after-optimize.log
+```
 
 ### Useful commands/queries
 
@@ -107,7 +115,6 @@ Get the output of EC2 initialization. Useful for troubleshooting cloud init.
 ```bash
 aws ec2 get-console-output --instance-id i-0123456789abcdefg --output=text
 ```
-
 
 
 ## Sources
