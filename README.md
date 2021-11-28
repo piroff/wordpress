@@ -14,7 +14,7 @@ It is expected that the user already has AWS CLI and Terraform CLI installed on 
 
 ## Installation
 
-Download the current project (git clone it, or else) to your system. You may want to review the default preset configurtion in terraform.tfvars file in the project root directory:
+Download the current project (git clone it, or else) to your system. You may want to review the default preset configuration in terraform.tfvars file in the project root directory:
 
 ```hcl
 region = "eu-west-1"
@@ -34,7 +34,7 @@ With or without changes, you can proceed with the creation of infrastructure and
 terraform init
 terraform apply
 ```
-Execution plan will be printed and you will be prompted whether to create the resurce (in case -auto-approve option is not used). Type 'yes' to proceed with the creation. End-to-end process will take ~5 min. It may take another minute until all services are up and healthy.
+Execution plan will be printed and you will be prompted whether to create the resource (in case -auto-approve option is not used). Type 'yes' to proceed with the creation. End-to-end process will take ~5 min. It may take another minute until all services are up and healthy.
 ```bash
 Enter a value: yes
 ```
@@ -73,7 +73,7 @@ You can SSH directly to any of the EC2 instances using the instance_public_ip fr
 ssh -i credentials/private_key.pem ec2-user@<IP>
 ```
 ![App Screenshot](screenshots/ec2_login.png)
-Use the lb_dns_name output to access the Wordpres home page.  
+Use the lb_dns_name output to access the Wordpress home page.  
 Also, individual public IP address can also be used to ensure each EC2 instance is up and running (without then need to login to the AWS console and check Target Group targets availability)
 
 
